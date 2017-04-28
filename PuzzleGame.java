@@ -23,7 +23,7 @@ public class PuzzleGame extends JFrame implements ActionListener{
     {
         //Initialize Window
         JFrame frameWindow = new JFrame("Puzzle Game");
-        frameWindow.setSize(250,300);
+        frameWindow.setSize(240,300);
         frameWindow.setLayout(null);
         frameWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,16 +96,112 @@ public class PuzzleGame extends JFrame implements ActionListener{
         frameWindow.add(button8);
         frameWindow.add(EmptySpace);
 
-        frameWindow.setVisible(true);
-
 
         //Logic
+        //Add Action Listeners
+        button1.addActionListener(this);
+        button2.addActionListener(this);
+        button3.addActionListener(this);
+        button4.addActionListener(this);
+        button5.addActionListener(this);
+        button6.addActionListener(this);
+        button7.addActionListener(this);
+        button8.addActionListener(this);
+        EmptySpace.addActionListener(this);
+
+
+        frameWindow.setVisible(true);
+
 
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        if(e.getSource() == button1)
+        {
+            System.out.println("Distigign");
+            int x = button1.getBounds().x;
+            int y = button1.getBounds().y;
+            int width = button1.getBounds().width;
+            int height = button1.getBounds().height;
+
+            button1.setBounds(x+20,y+20,width,height);
+
+        }
+
+        if(e.getSource() == button8)
+        {
+            int emptyX = EmptySpace.getBounds().x;
+            int emptyY = EmptySpace.getBounds().y;
+            int thisX = button8.getBounds().x;
+            int thisY = button8.getBounds().y;
+
+            //Check weather the EmptySpace is in the same row
+            if(emptyY == thisY)
+            {
+                System.out.println("Empty Space Y = " + emptyY + " Button8 Y = " + thisY);
+                //Check weather Empty space is in left or right
+                if(thisX < emptyX)
+                {
+                    //Empty space is in Right side
+                    //Move this to EmptySpace Location and vice versa
+
+                    button8.setBounds(emptyX,emptyY,62,63);
+                    EmptySpace.setBounds(thisX,thisY,62,63);
+                }
+                else if(thisX > emptyX)
+                {
+                    //Empty Space in Left side
+                    //Move this to EmptySpace location and vice versa
+                    button8.setBounds(emptyX,emptyY,62,63);
+                    EmptySpace.setBounds(thisX,thisY,62,63);
+                }
+            }
+            //Check weather EmptySpace and button is in the same adjacent column
+            else if(emptyX == thisX)
+            {
+                System.out.println("Empty Space X = " + emptyY + " Button8 X = " + thisY);
+
+            }
+        }
+
+        if(e.getSource() == button6)
+        {
+            int emptyX = EmptySpace.getBounds().x;
+            int emptyY = EmptySpace.getBounds().y;
+            int thisX = button6.getBounds().x;
+            int thisY = button6.getBounds().y;
+
+            //Check weather the EmptySpace is in the same row
+            if(emptyY == thisY)
+            {
+                System.out.println("Empty Space Y = " + emptyY + " button6 Y = " + thisY);
+                //Check weather Empty space is in left or right
+                if(thisX < emptyX)
+                {
+                    //Empty space is in Right side
+                    //Move this to EmptySpace Location and vice versa
+
+                    button6.setBounds(emptyX,emptyY,62,63);
+                    EmptySpace.setBounds(thisX,thisY,62,63);
+                }
+                else if(thisX > emptyX)
+                {
+                    //Empty Space in Left side
+                    //Move this to EmptySpace location and vice versa
+                    button6.setBounds(emptyX,emptyY,62,63);
+                    EmptySpace.setBounds(thisX,thisY,62,63);
+                }
+            }
+            //Check weather EmptySpace and button is in the same adjacent column
+            else if(emptyX == thisX)
+            {
+                System.out.println("Empty Space X = " + emptyX + " button6 X = " + thisX);
+
+            }
+        }
 
     }
 

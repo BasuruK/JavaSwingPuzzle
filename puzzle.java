@@ -137,6 +137,6 @@ public class puzzle extends JFrame implements ActionListener{
 
 //    public static void main(String[] args){
 //        new puzzle();
-//    }//end of main
+//   }//end of main
 
 }//end of class  
