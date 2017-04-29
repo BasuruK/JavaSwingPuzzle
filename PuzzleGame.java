@@ -8,81 +8,70 @@ import java.io.IOException;
 
 public class PuzzleGame extends JFrame implements ActionListener{
 
-
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JButton button4;
-    private JButton button5;
-    private JButton button6;
-    private JButton button7;
-    private JButton button8;
     private JButton EmptySpace;
 
     public PuzzleGame() throws IOException
     {
         //Initialize Window
         JFrame frameWindow = new JFrame("Puzzle Game");
-        frameWindow.setSize(240,300);
+        frameWindow.setSize(240,280);
         frameWindow.setLayout(null);
         frameWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
 
         //Initialize Buttons
         //Button 1
         ImageIcon img = loadIMG("images/1");
-        button1 = new JButton();
-        int offset1 = button1.getInsets().left;
+        JButton button1 = new JButton();
         button1.setBounds(10,30,62 ,63);
-        button1.setIcon(resizeIcon(img,button1.getWidth() - offset1 ,button1.getHeight() - offset1));
+        button1.setIcon(resizeIcon(img, button1.getWidth(), button1.getHeight()));
 
         //Button 2
         ImageIcon img2 = loadIMG("images/2");
-        button2 = new JButton();
+        JButton button2 = new JButton();
         button2.setBounds(80,30,62 ,63);
-        button2.setIcon(resizeIcon(img2,button2.getWidth() - offset1 ,button2.getHeight() - offset1));
+        button2.setIcon(resizeIcon(img2, button2.getWidth(), button2.getHeight()));
 
         //Button 3
         ImageIcon img3 = loadIMG("images/3");
-        button3 = new JButton();
+        JButton button3 = new JButton();
         button3.setBounds(150,30,62 ,63);
-        button3.setIcon(resizeIcon(img3,button3.getWidth() - offset1 ,button3.getHeight() - offset1));
+        button3.setIcon(resizeIcon(img3, button3.getWidth(), button3.getHeight()));
 
         //Button 4
         ImageIcon img4 = loadIMG("images/4");
-        button4 = new JButton();
+        JButton button4 = new JButton();
         button4.setBounds(10,100,62 ,63);
-        button4.setIcon(resizeIcon(img4,button4.getWidth() - offset1 ,button4.getHeight() - offset1));
+        button4.setIcon(resizeIcon(img4, button4.getWidth(), button4.getHeight()));
 
         //Button 5
         ImageIcon img5 = loadIMG("images/5");
-        button5 = new JButton();
+        JButton button5 = new JButton();
         button5.setBounds(80,100,62 ,63);
-        button5.setIcon(resizeIcon(img5,button5.getWidth() - offset1 ,button5.getHeight() - offset1));
+        button5.setIcon(resizeIcon(img5, button5.getWidth(), button5.getHeight()));
 
         //Button 6
         ImageIcon img6 = loadIMG("images/6");
-        button6 = new JButton();
+        JButton button6 = new JButton();
         button6.setBounds(150,100,62 ,63);
-        button6.setIcon(resizeIcon(img6,button6.getWidth() - offset1 ,button6.getHeight() - offset1));
+        button6.setIcon(resizeIcon(img6, button6.getWidth(), button6.getHeight()));
 
         //Button 7
         ImageIcon img7 = loadIMG("images/7");
-        button7 = new JButton();
+        JButton button7 = new JButton();
         button7.setBounds(10,170,62 ,63);
-        button7.setIcon(resizeIcon(img7,button7.getWidth() - offset1 ,button7.getHeight() - offset1));
+        button7.setIcon(resizeIcon(img7, button7.getWidth(), button7.getHeight()));
 
         //Button 8
         ImageIcon img8 = loadIMG("images/8");
-        button8 = new JButton();
+        JButton button8 = new JButton();
         button8.setBounds(80,170,62 ,63);
-        button8.setIcon(resizeIcon(img8,button8.getWidth() - offset1 ,button8.getHeight() - offset1));
+        button8.setIcon(resizeIcon(img8, button8.getWidth(), button8.getHeight()));
 
         //Button EmptySpace
         ImageIcon img9 = loadIMG("images/Empty");
         EmptySpace = new JButton();
         EmptySpace.setBounds(150,170,62 ,63);
-        EmptySpace.setIcon(resizeIcon(img9,EmptySpace.getWidth() - offset1 ,EmptySpace.getHeight() - offset1));
+        EmptySpace.setIcon(resizeIcon(img9,EmptySpace.getWidth() ,EmptySpace.getHeight()));
 
 
         //Add the images to the Frame
@@ -96,7 +85,6 @@ public class PuzzleGame extends JFrame implements ActionListener{
         frameWindow.add(button8);
         frameWindow.add(EmptySpace);
 
-
         //Logic
         //Add Action Listeners
         button1.addActionListener(this);
@@ -107,103 +95,64 @@ public class PuzzleGame extends JFrame implements ActionListener{
         button6.addActionListener(this);
         button7.addActionListener(this);
         button8.addActionListener(this);
-        EmptySpace.addActionListener(this);
-
+        //EmptySpace.addActionListener(this);
 
         frameWindow.setVisible(true);
-
-
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource() == button1)
-        {
-            System.out.println("Distigign");
-            int x = button1.getBounds().x;
-            int y = button1.getBounds().y;
-            int width = button1.getBounds().width;
-            int height = button1.getBounds().height;
+        JButton b = (JButton) e.getSource();
 
-            button1.setBounds(x+20,y+20,width,height);
-
-        }
-
-        if(e.getSource() == button8)
+        if(e.getSource() == b)
         {
             int emptyX = EmptySpace.getBounds().x;
             int emptyY = EmptySpace.getBounds().y;
-            int thisX = button8.getBounds().x;
-            int thisY = button8.getBounds().y;
+            int thisX = b.getBounds().x;
+            int thisY = b.getBounds().y;
 
             //Check weather the EmptySpace is in the same row
             if(emptyY == thisY)
             {
-                System.out.println("Empty Space Y = " + emptyY + " Button8 Y = " + thisY);
-                //Check weather Empty space is in left or right
-                if(thisX < emptyX)
+                //Check weather Empty space is in left or right and if its the Adjacent item
+                if(thisX < emptyX && Math.abs(emptyX - thisX) < 100)
                 {
                     //Empty space is in Right side
                     //Move this to EmptySpace Location and vice versa
-
-                    button8.setBounds(emptyX,emptyY,62,63);
+                    b.setBounds(emptyX,emptyY,62,63);
                     EmptySpace.setBounds(thisX,thisY,62,63);
                 }
-                else if(thisX > emptyX)
+                else if(thisX > emptyX && (Math.abs(emptyX - thisX)) < 100)
                 {
                     //Empty Space in Left side
                     //Move this to EmptySpace location and vice versa
-                    button8.setBounds(emptyX,emptyY,62,63);
+                    b.setBounds(emptyX,emptyY,62,63);
                     EmptySpace.setBounds(thisX,thisY,62,63);
                 }
             }
-            //Check weather EmptySpace and button is in the same adjacent column
+            //Check weather EmptySpace and button is in the same column
             else if(emptyX == thisX)
             {
-                System.out.println("Empty Space X = " + emptyY + " Button8 X = " + thisY);
-
-            }
-        }
-
-        if(e.getSource() == button6)
-        {
-            int emptyX = EmptySpace.getBounds().x;
-            int emptyY = EmptySpace.getBounds().y;
-            int thisX = button6.getBounds().x;
-            int thisY = button6.getBounds().y;
-
-            //Check weather the EmptySpace is in the same row
-            if(emptyY == thisY)
-            {
-                System.out.println("Empty Space Y = " + emptyY + " button6 Y = " + thisY);
-                //Check weather Empty space is in left or right
-                if(thisX < emptyX)
+                //Check whether the EmptySpace is in top or bottom and if its only the adjacent column
+                if(thisY < emptyY && (Math.abs(emptyY - thisY) < 100))
                 {
-                    //Empty space is in Right side
-                    //Move this to EmptySpace Location and vice versa
-
-                    button6.setBounds(emptyX,emptyY,62,63);
+                    //Empty space is bottom
+                    b.setBounds(emptyX,emptyY,62,63);
                     EmptySpace.setBounds(thisX,thisY,62,63);
                 }
-                else if(thisX > emptyX)
+                else if( thisY > emptyY && (Math.abs(emptyY - thisY) < 100))
                 {
-                    //Empty Space in Left side
-                    //Move this to EmptySpace location and vice versa
-                    button6.setBounds(emptyX,emptyY,62,63);
+                    //EmptySpace is in top
+                    b.setBounds(emptyX,emptyY,62,63);
                     EmptySpace.setBounds(thisX,thisY,62,63);
                 }
-            }
-            //Check weather EmptySpace and button is in the same adjacent column
-            else if(emptyX == thisX)
-            {
-                System.out.println("Empty Space X = " + emptyX + " button6 X = " + thisX);
-
             }
         }
 
     }
+
 
     private ImageIcon loadIMG(String filename) throws IOException{
 
