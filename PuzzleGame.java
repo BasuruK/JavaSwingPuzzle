@@ -73,7 +73,6 @@ public class PuzzleGame extends JFrame implements ActionListener{
         EmptySpace.setBounds(150,170,62 ,63);
         EmptySpace.setIcon(resizeIcon(img9,EmptySpace.getWidth() ,EmptySpace.getHeight()));
 
-
         //Add the images to the Frame
         frameWindow.add(button1);
         frameWindow.add(button2);
@@ -95,64 +94,56 @@ public class PuzzleGame extends JFrame implements ActionListener{
         button6.addActionListener(this);
         button7.addActionListener(this);
         button8.addActionListener(this);
-        //EmptySpace.addActionListener(this);
 
         frameWindow.setVisible(true);
-
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
         JButton b = (JButton) e.getSource();
+        int emptyX = EmptySpace.getBounds().x;
+        int emptyY = EmptySpace.getBounds().y;
+        int thisX = b.getBounds().x;
+        int thisY = b.getBounds().y;
 
-        if(e.getSource() == b)
+        //Check weather the EmptySpace is in the same row
+        if(emptyY == thisY)
         {
-            int emptyX = EmptySpace.getBounds().x;
-            int emptyY = EmptySpace.getBounds().y;
-            int thisX = b.getBounds().x;
-            int thisY = b.getBounds().y;
-
-            //Check weather the EmptySpace is in the same row
-            if(emptyY == thisY)
+            //Check weather Empty space is in left or right and if its the Adjacent item
+            if(thisX < emptyX && Math.abs(emptyX - thisX) < 100)
             {
-                //Check weather Empty space is in left or right and if its the Adjacent item
-                if(thisX < emptyX && Math.abs(emptyX - thisX) < 100)
-                {
-                    //Empty space is in Right side
-                    //Move this to EmptySpace Location and vice versa
-                    b.setBounds(emptyX,emptyY,62,63);
-                    EmptySpace.setBounds(thisX,thisY,62,63);
-                }
-                else if(thisX > emptyX && (Math.abs(emptyX - thisX)) < 100)
-                {
-                    //Empty Space in Left side
-                    //Move this to EmptySpace location and vice versa
-                    b.setBounds(emptyX,emptyY,62,63);
-                    EmptySpace.setBounds(thisX,thisY,62,63);
-                }
+                //Empty space is in Right side
+                //Move this to EmptySpace Location and vice versa
+                b.setBounds(emptyX,emptyY,62,63);
+                EmptySpace.setBounds(thisX,thisY,62,63);
             }
-            //Check weather EmptySpace and button is in the same column
-            else if(emptyX == thisX)
+            else if(thisX > emptyX && (Math.abs(emptyX - thisX)) < 100)
             {
-                //Check whether the EmptySpace is in top or bottom and if its only the adjacent column
-                if(thisY < emptyY && (Math.abs(emptyY - thisY) < 100))
-                {
-                    //Empty space is bottom
-                    b.setBounds(emptyX,emptyY,62,63);
-                    EmptySpace.setBounds(thisX,thisY,62,63);
-                }
-                else if( thisY > emptyY && (Math.abs(emptyY - thisY) < 100))
-                {
-                    //EmptySpace is in top
-                    b.setBounds(emptyX,emptyY,62,63);
-                    EmptySpace.setBounds(thisX,thisY,62,63);
-                }
+                //Empty Space in Left side
+                //Move this to EmptySpace location and vice versa
+                b.setBounds(emptyX,emptyY,62,63);
+                EmptySpace.setBounds(thisX,thisY,62,63);
             }
         }
-
+        //Check weather EmptySpace and button is in the same column
+        else if(emptyX == thisX)
+        {
+            //Check whether the EmptySpace is in top or bottom and if its only the adjacent column
+            if(thisY < emptyY && (Math.abs(emptyY - thisY) < 100))
+            {
+                //Empty space is bottom
+                b.setBounds(emptyX,emptyY,62,63);
+                EmptySpace.setBounds(thisX,thisY,62,63);
+            }
+            else if( thisY > emptyY && (Math.abs(emptyY - thisY) < 100))
+            {
+                //EmptySpace is in top
+                b.setBounds(emptyX,emptyY,62,63);
+                EmptySpace.setBounds(thisX,thisY,62,63);
+            }
+        }
     }
-
 
     private ImageIcon loadIMG(String filename) throws IOException{
 
