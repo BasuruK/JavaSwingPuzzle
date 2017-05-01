@@ -17,6 +17,7 @@ public class PuzzleGame extends JFrame implements ActionListener{
         frameWindow.setSize(240,280);
         frameWindow.setLayout(null);
         frameWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frameWindow.setResizable(false);
 
         //Initialize Buttons
         //Button 1
