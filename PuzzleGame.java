@@ -1,3 +1,7 @@
+/**
+ * IT14020254
+ * Balasuriya B.K
+ */
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +22,7 @@ public class PuzzleGame extends JFrame implements ActionListener{
         frameWindow.setLayout(null);
         frameWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frameWindow.setResizable(false);
+        frameWindow.setLocationRelativeTo(null);
 
         //Initialize Buttons
         //Button 1
@@ -85,7 +90,6 @@ public class PuzzleGame extends JFrame implements ActionListener{
         frameWindow.add(button8);
         frameWindow.add(EmptySpace);
 
-        //Logic
         //Add Action Listeners
         button1.addActionListener(this);
         button2.addActionListener(this);
@@ -99,6 +103,7 @@ public class PuzzleGame extends JFrame implements ActionListener{
         frameWindow.setVisible(true);
     }
 
+    //Logic
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -160,7 +165,6 @@ public class PuzzleGame extends JFrame implements ActionListener{
         Image resizedImage = img.getScaledInstance(resizedWidth,resizedHeight, Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
     }
-
 
     public static void main(String[] args)
     {
